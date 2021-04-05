@@ -5,6 +5,7 @@
     list-style: none;
     text-decoration: none;
     font-family: 'Josefin Sans', sans-serif;
+    overflow: hidden;
 }
 
 body{
@@ -32,7 +33,6 @@ body{
 }
 
 .wrapper .side-nav ul li{
-    padding: 15px;
     border-bottom: 1px solid rgba(0,0,0,0.05);
     border-top: 1px solid rgba(225,225,225,0.05);
 }
@@ -40,6 +40,7 @@ body{
 .wrapper .side-nav ul li a{
     color: #bdb8d7;
     display: block;
+    padding: 15px;
 }
 
 .wrapper .side-nav ul li a .fas{
@@ -52,4 +53,11 @@ body{
 
 .wrapper .side-nav ul li:hover a{
     color: #fff;
+}
+
+/*Keeps content from overlapping with nav bar.*/
+#main-content {
+  position: relative;
+  left: 200px;
+  height: 100%;
 }
