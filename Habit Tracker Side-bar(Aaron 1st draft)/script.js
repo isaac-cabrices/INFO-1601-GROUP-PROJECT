@@ -1,20 +1,19 @@
 
-//This is the object that holds all the user data
-let tasks = [
+// User card data
+
+
+let tasks = [];
+//This is the object that holds all the user data. Example format:
 //  {
-//    id: 0,
+//    id: Date.now(),
 //    name: "Example task",
-//    description: "This in an example task. Create 3 tasks of your own!",
+//    description: "This in an example task. Create 3 tasks.",
 //    todo: 3,
 //    completed: 0
 //  }
-];
 
-//        const loadTasks = function(){
-//
-//          };
 
-// This function adds data to an object, and then stores that object in local storage.
+// This function adds data to the tasks object, and then stores that object in local storage.
 const addTask = function(event){
     event.preventDefault();
     let task = { // gets the data from the form.
@@ -30,13 +29,11 @@ const addTask = function(event){
     localStorage.setItem('TaskList', JSON.stringify(tasks)); // stored locally. Stringify cause it has to be stored as a string.
 }
 
-document.addEventListener('DOMContentLoaded', ()=> { // listens for the click in the form.
-    document.getElementById('button').addEventListener('click', addTask);
+// Listens for click in the form. Maybe it's better to have this with the forms html if it causes any errors.
+
+document.addEventListener('DOMContentLoaded', ()=> { //checks that the page is loaded first
+    document.getElementById('button').addEventListener('click', addTask); // button ID in the form
 });
-
-
-
-// Everything below this line was added by crowbar72, I am merely merging it with what I have.
 
 
 //One page navigation
@@ -55,7 +52,7 @@ function executeScripts(){
 async function loadContent(title,url) {
 
   document.title = title;
-  let content = document.querySelector('#main-content');
+  let content = document.querySelector('#navi');
 
   if(url == null) {
     content.innerHTML = "";
@@ -81,7 +78,7 @@ function pageShift(event){
 }
 
 //Identifies the nav bar and intercepts clicks on links.
-const navBar = document.querySelector('#nav-bar');
+const navBar = document.querySelector('#navi');
 //if(navBar){    // I'm pretty sure the error's only happening cause there's nothing to yet for when you click the sidenav buttons. Uncomment the if to have it disappear until you click the side-nav buttons.
     navBar.addEventListener('click', pageShift, false);
 //}
