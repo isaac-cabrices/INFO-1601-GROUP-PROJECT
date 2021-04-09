@@ -1,17 +1,13 @@
 
-// User card data
-
+// User data
 
 let tasks = [];
 //This is the object that holds all the user data. Example format:
-//  {
 //    id: Date.now(),
 //    name: "Example task",
 //    description: "This in an example task. Create 3 tasks.",
 //    todo: 3,
 //    completed: 0
-//  }
-
 
 // This function adds data to the tasks object, and then stores that object in local storage.
 const addTask = function(event){
