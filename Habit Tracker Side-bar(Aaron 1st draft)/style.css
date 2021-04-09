@@ -5,14 +5,18 @@
     list-style: none;
     text-decoration: none;
     font-family: 'Josefin Sans', sans-serif;
-<<<<<<< HEAD
     overflow: hidden;
-=======
->>>>>>> parent of a30a8f7 (7-04-2021-Isaac-form-input-local-storage-and-other-small-changes)
 }
 
 body{
     background: #f1f3f7;
+}
+
+/*Keeps content from overlapping with nav bar.*/
+.main-content {
+  position: relative;
+  left: 200px;
+  height: 100%;
 }
 
 .wrapper{
@@ -25,7 +29,7 @@ body{
     width: 200px;
     height: 100%;
     background: #640d97;
-    padding: 30px 0; 
+    padding: 30px 0;
 }
 
 .wrapper .side-nav h2{
