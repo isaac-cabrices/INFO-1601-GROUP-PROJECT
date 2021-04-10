@@ -12,6 +12,13 @@ body{
     background: #f1f3f7;
 }
 
+/*Keeps content from overlapping with nav bar.*/
+.main-content {
+  position: relative;
+  left: 200px;
+  height: 100%;
+}
+
 .wrapper{
     display: flex;
     position: relative;
@@ -22,7 +29,7 @@ body{
     width: 200px;
     height: 100%;
     background: #640d97;
-    padding: 30px 0; 
+    padding: 30px 0;
 }
 
 .wrapper .side-nav h2{
@@ -53,11 +60,4 @@ body{
 
 .wrapper .side-nav ul li:hover a{
     color: #fff;
-}
-
-/*Keeps content from overlapping with nav bar.*/
-#main-content {
-  position: relative;
-  left: 200px;
-  height: 100%;
 }
