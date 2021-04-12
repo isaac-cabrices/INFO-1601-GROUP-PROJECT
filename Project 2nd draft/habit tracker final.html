@@ -18,8 +18,7 @@
             <span>Add Habit</span>
         </div>
     </div>
-
-
+              
     <!-- The Modal form for user input -->
     <div id="myModal" class="modal">
 
@@ -47,63 +46,70 @@
       </div>
 
     </div>
-
-        <!--HABIT CARDS-->
-        <div class="cards-wrapper">
-            <div class="card">
-                <div class="habit-title">
-                    <h1>STUDY</h1>
-                </div>
-                <div class="delete-button">X</div>
-                <div class="progress-bars">
-                    <div class="progress-bar"></div>
-                    <div class="progress-bar"></div>
-                    <div class="progress-bar"></div>
-                    <div class="progress-bar"></div>
-                    <div class="progress-bar"></div>
-                </div>
+    <!--HABIT CARDS-->
+    <div class="cards-wrapper">
+        <div id="card1" class="card">
+            <div class="habit-title">
+                <h1>STUDY</h1>
             </div>
-
-            <div class="card">
-                <div class="habit-title">
-                    <h1>EXERCISE</h1>
-                </div>
-                <div class="delete-button">X</div>
-                <div class="progress-bars">
-                    <div class="progress-bar"></div>
-                    <div class="progress-bar"></div>
-                    <div class="progress-bar"></div>
-                </div>
+            <div id="delbut1" class="delete-button">X</div>
+            <div class="progress-bars">
+                <div class="progress-bar"></div>
+                <div class="progress-bar"></div>
+                <div class="progress-bar"></div>
+                <div class="progress-bar"></div>
+                <div class="progress-bar"></div>
             </div>
-
-            <div class="card">
-                <div class="habit-title">
-                    <h1>PLAY VIOLIN</h1>
-                </div>
-                <div class="delete-button">X</div>
-                <div class="progress-bars">
-                    <div class="progress-bar"></div>
-                    <div class="progress-bar"></div>
-                    <div class="progress-bar"></div>
-                    <div class="progress-bar"></div>
-                </div>
+        </div>
+        
+        <div id="card2" class="card">
+            <div class="habit-title">
+                <h1>EXERCISE</h1>
             </div>
+            <div id="delbut2" class="delete-button">X</div>
+            <div class="progress-bars">
+                <div class="progress-bar"></div>
+                <div class="progress-bar"></div>
+                <div class="progress-bar"></div>
+            </div>
+        </div>
 
-            <div class="card">
-                <div class="habit-title">
-                    <h1>MEDITATE</h1>
-                </div>
-                <div class="delete-button">X</div>
-                <div class="progress-bars">
-                    <div class="progress-bar"></div>
-                    <div class="progress-bar"></div>
-                    <div class="progress-bar"></div>
+        <div id="card3" class="card">
+            <div class="habit-title">
+                <h1>PLAY VIOLIN</h1>
+            </div>
+            <div id="delbut3" class="delete-button">X</div>
+            <div class="progress-bars">
+                <div class="progress-bar"></div>
+                <div class="progress-bar"></div>
+                <div class="progress-bar"></div>
+                <div class="progress-bar"></div>
+            </div>
+        </div>
 
+        <div id="card4" class="card">
+            <div class="habit-title">
+                <h1>MEDITATE</h1>
+            </div>
+            <div id="delbut4" class="delete-button">X</div>
+            <div class="progress-bars">
+                <div class="progress-bar"></div>
+                <div class="progress-bar"></div>
+                <div class="progress-bar"></div>
+              
             </div>
         </div>
     </div>
 
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/store.js/2.0.0/store.legacy.min.js"></script>
-        <script src="script.js"></script>
-    </body>
-    </html>
+    <!--ADD HABIT FORM
+    <form method = "post" class="new-habit-form">
+        <h1>ENTER A NEW HABIT</h1>
+        <input type="text" class="habit-title" placeholder="New Habit">
+        <input type="number" class="habit-repeats" placeholder="Number of Times">
+        <button class="create-habit-button">Create Habit</button>
+    </form>
+    -->
+    <script src="script.js"></script>
+</body>
+</html>
+
