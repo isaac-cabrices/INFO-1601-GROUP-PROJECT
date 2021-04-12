@@ -11,7 +11,7 @@
 <body>
     <!--ADD HABIT BUTTON-->
     <div class="button-wrapper">
-        <div id="formBtn" class="button">
+        <div class="button" onclick="openForm()">
             <div class="icon">
                 <p>+</p>
             </div>
@@ -19,8 +19,7 @@
         </div>
     </div>
 
-
-    <!-- The Modal form for user input -->
+    <!-- The Modal -->
     <div id="myModal" class="modal">
 
       <!-- Modal content -->
@@ -98,12 +97,19 @@
                     <div class="progress-bar"></div>
                     <div class="progress-bar"></div>
                     <div class="progress-bar"></div>
-
             </div>
         </div>
     </div>
+    <!--ADD HABIT FORM
+    <form method = "post" class="new-habit-form">
+        <h1>ENTER A NEW HABIT</h1>
+        <input type="text" class="habit-title" placeholder="New Habit">
+        <input type="number" class="habit-repeats" placeholder="Number of Times">
+        <button class="create-habit-button">Create Habit</button>
+    </form>
+    -->
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/store.js/2.0.0/store.legacy.min.js"></script>
-        <script src="script.js"></script>
+
     </body>
     </html>

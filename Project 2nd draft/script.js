@@ -9,7 +9,7 @@ var btn = document.getElementById("formBtn");
 var span = document.getElementsByClassName("close")[0];
 
 // When the user clicks on the button, open the modal
-btn.onclick = function() {
+function openForm() {
   modal.style.display = "block";
 }
 
