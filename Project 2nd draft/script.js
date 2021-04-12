@@ -69,7 +69,7 @@ window.onclick = function(event) {
   }
 }
 
-
+/*
 const tasks = [];
 //This is the object that holds all the user data. Example format:
 //    id: Date.now(),
@@ -109,5 +109,97 @@ function removedata(index){
 
 document.addEventListener('DOMContentLoaded', ()=> { //checks that the page is loaded first
     document.getElementById('inputButton').addEventListener('click', addToList);
+});*/
+
+
+var submitButton = document.getElementById('inputButton');
+//when submit is pressed, move form
+submitButton.onclick = function() {
+    modal.style.display = "none";
+}
+
+//Get Info from form to create habit card
+let habitsList = [];
+const createNewHabit = (e)=>{
+    //prevent form from submitting as default
+    e.preventDefault();
+
+    //get form data into object
+    let habitInfo = {
+        id: Date.now(),
+        habitTitle: document.getElementById('title').value,
+        numRepeats: document.getElementById('todo').value,
+        description: document.getElementById('description').value
+    }
+
+    //put form data object onto habits array
+    habitsList.push(habitInfo);
+    console.log(habitsList);
+
+    //reset form
+    document.getElementById('addTaskForm').reset();
+
+    //save to local storage
+    localStorage.setItem('SavedHabits', JSON.stringify(habitsList));
+
+    createHabitCard(habitInfo);
+}
+
+//Create habit card using form info from function above
+function createHabitCard(data){
+let habitArray = JSON.parse(localStorage.getItem("SavedHabits"));
+let info = habitArray.find(function(habit, index){
+    if(habit.id == data.id)
+        return true;
 });
+let i = 0;
+let cardsPosition = document.querySelector('.cards-wrapper');
+let pbars = '';
+for(i = 0; i < info.numRepeats; i++){
+    pbars += '<div class="progress-bar"></div>'
+}
+cardsPosition.innerHTML += `
+    <div id="${info.id}" class="card">
+        <div class="habit-title">
+            <h1>${info.habitTitle}</h1>
+        </div>
+        <div id="delbut1" class="delete-button">X</div>
+        <div class="progress-bars">  
+        ${pbars}
+        </div>
+    </div> 
+        `
+}
+
+document.addEventListener('DOMContentLoaded', ()=> {
+    submitButton.addEventListener('click', createNewHabit);
+});
+
+//When page reloaded, read local storage to get all habit cards
+function displayCardsOnReload(){
+    let habitArray = JSON.parse(localStorage.getItem("SavedHabits"));
+    for(let habit in habitArray){
+        habit = habitArray[habit];
+        console.log(habit);
+        let i = 0;
+        let cardsPosition = document.querySelector('.cards-wrapper');
+        let pbars = '';
+        for(i = 0; i < habit.numRepeats; i++){
+            pbars += '<div class="progress-bar"></div>'
+        }
+        cardsPosition.innerHTML += `
+            <div id="${habit.id}" class="card">
+                <div class="habit-title">
+                    <h1>${habit.habitTitle}</h1>
+                </div>
+                <div id="delbut1" class="delete-button">X</div>
+                <div class="progress-bars">  
+                ${pbars}
+                </div>
+            </div> 
+            `
+    }
+}
+window.onload = displayCardsOnReload;
+
 
