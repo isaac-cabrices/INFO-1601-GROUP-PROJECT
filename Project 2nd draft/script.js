@@ -97,29 +97,34 @@ submitButton.onclick = function() {
 //Get Info from form to create habit card
 let habitsList = [];
 const createNewHabit = (e)=>{
-    //prevent form from submitting as default
-    e.preventDefault();
+    if(document.getElementById('title').value != "" && document.getElementById('todo').value != "" ){
+        //prevent form from submitting as default
+        e.preventDefault();
 
-    //get form data into object
-    let habitInfo = {
-        id: Date.now(),
-        habitTitle: document.getElementById('title').value,
-        numRepeats: document.getElementById('todo').value,
-        description: document.getElementById('description').value
+        //get form data into object
+        let habitInfo = {
+            id: Date.now(),
+            habitTitle: document.getElementById('title').value,
+            numRepeats: document.getElementById('todo').value,
+            description: document.getElementById('description').value
+        }
+
+        //put form data object onto habits array. Appends it to existing list so as to not delete it.
+        var oldHabits = store.get('SavedHabits');
+        oldHabits.push(habitInfo);
+        console.log(oldHabits);
+
+        //reset form
+        document.getElementById('addTaskForm').reset();
+
+        //save to local storage
+        store.set('SavedHabits', oldHabits);
+
+        createHabitCard(habitInfo);
     }
-
-    //put form data object onto habits array
-    let oldHabits = store.get("SavedHabits");
-    oldHabits.push(habitInfo);
-    console.log(oldHabits);
-
-    //reset form
-    document.getElementById('addTaskForm').reset();
-
-    //save to local storage
-    storage.set('SavedHabits', oldHabits);
-
-    createHabitCard(habitInfo);
+    else{
+      alert("invalid card");
+    }
 }
 
 //Create habit card using form info from function above
@@ -155,6 +160,10 @@ document.addEventListener('DOMContentLoaded', ()=> {
 //When page reloaded, read local storage to get all habit cards
 function displayCardsOnReload(){
     let habitArray = store.get("SavedHabits");
+    if(habitArray == undefined){ // this if loop accounts for when there is no object created as yet.
+    store.set('SavedHabits', habitsList);
+      habitArray = store.get("SavedHabits");
+    }
     if(habitArray.length === 0){
         console.log("No Habits Stored");
     }
