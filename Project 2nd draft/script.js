@@ -1,44 +1,20 @@
-
 //Deleting cards
 
-function prepCards() {
-  
-  var i = 1;
-  var ids = [];
-
-  var counting = true;
-  while(counting === true) {
-
-    var name = "#card" + i;
-    var c = document.querySelector(name);
-
-    if(c) {
-      //console.log('Exists');
-      ids.push(i)
-    }
-    else {
-      //console.log('Does not exist');
-      counting = false;
-    }
-
-    i = i + 1;
-  }
-
-  return ids;
-}
-
-function deleteCard(id) {
+function deleteCard(card) {
 
   if (confirm('Are you sure you want to delete this card?')) {
-    document.querySelector("#card" + id).remove();
+    document.getElementById(card.id).remove();
   }
 
 }
+//Gets all the cards currently in the site by the .card class
+var cards;
+cards = document.querySelectorAll(".card");
 
-var ids = prepCards();
-for(let id of ids) {
-  document.querySelector("#delbut" + id).addEventListener('click', function() {
-    deleteCard(id);
+//For every card in the cards array sets an event listener on the delete button.
+for(let card of cards) {
+  card.querySelector(".delete-button").addEventListener('click', function() {
+    deleteCard(card);
   });
 }
 
