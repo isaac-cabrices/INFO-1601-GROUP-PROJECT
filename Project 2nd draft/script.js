@@ -109,21 +109,22 @@ const createNewHabit = (e)=>{
     }
 
     //put form data object onto habits array
-    habitsList.push(habitInfo);
-    console.log(habitsList);
+    let oldHabits = store.get("SavedHabits");
+    oldHabits.push(habitInfo);
+    console.log(oldHabits);
 
     //reset form
     document.getElementById('addTaskForm').reset();
 
     //save to local storage
-    localStorage.setItem('SavedHabits', JSON.stringify(habitsList));
+    storage.set('SavedHabits', oldHabits);
 
     createHabitCard(habitInfo);
 }
 
 //Create habit card using form info from function above
 function createHabitCard(data){
-let habitArray = JSON.parse(localStorage.getItem("SavedHabits"));
+let habitArray = store.get("SavedHabits");
 let info = habitArray.find(function(habit, index){
     if(habit.id == data.id)
         return true;
@@ -140,10 +141,10 @@ cardsPosition.innerHTML += `
             <h1>${info.habitTitle}</h1>
         </div>
         <div id="delbut1" class="delete-button">X</div>
-        <div class="progress-bars">  
+        <div class="progress-bars">
         ${pbars}
         </div>
-    </div> 
+    </div>
         `
 }
 
@@ -153,7 +154,7 @@ document.addEventListener('DOMContentLoaded', ()=> {
 
 //When page reloaded, read local storage to get all habit cards
 function displayCardsOnReload(){
-    let habitArray = JSON.parse(localStorage.getItem("SavedHabits"));
+    let habitArray = store.get("SavedHabits");
     if(habitArray.length === 0){
         console.log("No Habits Stored");
     }
@@ -173,14 +174,12 @@ function displayCardsOnReload(){
                         <h1>${habit.habitTitle}</h1>
                     </div>
                     <div id="delbut1" class="delete-button">X</div>
-                    <div class="progress-bars">  
+                    <div class="progress-bars">
                     ${pbars}
                     </div>
-                </div> 
+                </div>
                 `
         }
-    } 
+    }
 }
 window.onload = displayCardsOnReload;
-
-
