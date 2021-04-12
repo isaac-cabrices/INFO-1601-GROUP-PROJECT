@@ -178,27 +178,32 @@ document.addEventListener('DOMContentLoaded', ()=> {
 //When page reloaded, read local storage to get all habit cards
 function displayCardsOnReload(){
     let habitArray = JSON.parse(localStorage.getItem("SavedHabits"));
-    for(let habit in habitArray){
-        habit = habitArray[habit];
-        console.log(habit);
-        let i = 0;
-        let cardsPosition = document.querySelector('.cards-wrapper');
-        let pbars = '';
-        for(i = 0; i < habit.numRepeats; i++){
-            pbars += '<div class="progress-bar"></div>'
-        }
-        cardsPosition.innerHTML += `
-            <div id="${habit.id}" class="card">
-                <div class="habit-title">
-                    <h1>${habit.habitTitle}</h1>
-                </div>
-                <div id="delbut1" class="delete-button">X</div>
-                <div class="progress-bars">  
-                ${pbars}
-                </div>
-            </div> 
-            `
+    if(habitArray.length === 0){
+        console.log("No Habits Stored");
     }
+    else{
+        for(let habit in habitArray){
+            habit = habitArray[habit];
+            console.log(habit);
+            let i = 0;
+            let cardsPosition = document.querySelector('.cards-wrapper');
+            let pbars = '';
+            for(i = 0; i < habit.numRepeats; i++){
+                pbars += '<div class="progress-bar"></div>'
+            }
+            cardsPosition.innerHTML += `
+                <div id="${habit.id}" class="card">
+                    <div class="habit-title">
+                        <h1>${habit.habitTitle}</h1>
+                    </div>
+                    <div id="delbut1" class="delete-button">X</div>
+                    <div class="progress-bars">  
+                    ${pbars}
+                    </div>
+                </div> 
+                `
+        }
+    } 
 }
 window.onload = displayCardsOnReload;
 
