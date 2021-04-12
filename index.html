@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel = "stylesheet" href="style.css">
+    <title>PROJECT </title>
+</head>
+
+<body>
+    <!--ADD HABIT BUTTON-->
+    <div class="button-wrapper">
+        <div id="formBtn" class="button">
+            <div class="icon">
+                <p>+</p>
+            </div>
+            <span>Add Habit</span>
+        </div>
+    </div>
+
+
+    <!-- The Modal form for user input -->
+    <div id="myModal" class="modal">
+
+      <!-- Modal content -->
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <form id="addTaskForm">
+            <div class = "titleDiv">
+                <label for = "title"> Task </label>
+                <input type="text" id="title" placeholder="Name of the task"/>
+            </div>
+            <div class = "todoDiv">
+                <label for = "title">  Repeats </label>
+                <input type="number" id="todo" placeholder="Repeat it how many times?"/>
+            </div>
+            <div class = "descDiv">
+                <label for = "title"> Description </label>
+                <input type="text" id="description" placeholder="Description of the task"/>
+            </div>
+            <div class = "inputDiv">
+                <label for = "inputButton"> input </label>
+                <button id="inputButton"> Create task </button>
+            </div>
+        </form><!-- END forms section -->
+      </div>
+
+    </div>
+
+        <!--HABIT CARDS-->
+        <div class="cards-wrapper">
+            <div class="card">
+                <div class="habit-title">
+                    <h1>STUDY</h1>
+                </div>
+                <div class="delete-button">X</div>
+                <div class="progress-bars">
+                    <div class="progress-bar"></div>
+                    <div class="progress-bar"></div>
+                    <div class="progress-bar"></div>
+                    <div class="progress-bar"></div>
+                    <div class="progress-bar"></div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="habit-title">
+                    <h1>EXERCISE</h1>
+                </div>
+                <div class="delete-button">X</div>
+                <div class="progress-bars">
+                    <div class="progress-bar"></div>
+                    <div class="progress-bar"></div>
+                    <div class="progress-bar"></div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="habit-title">
+                    <h1>PLAY VIOLIN</h1>
+                </div>
+                <div class="delete-button">X</div>
+                <div class="progress-bars">
+                    <div class="progress-bar"></div>
+                    <div class="progress-bar"></div>
+                    <div class="progress-bar"></div>
+                    <div class="progress-bar"></div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="habit-title">
+                    <h1>MEDITATE</h1>
+                </div>
+                <div class="delete-button">X</div>
+                <div class="progress-bars">
+                    <div class="progress-bar"></div>
+                    <div class="progress-bar"></div>
+                    <div class="progress-bar"></div>
+
+            </div>
+        </div>
+    </div>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/store.js/2.0.0/store.legacy.min.js"></script>
+        <script src="script.js"></script>
+    </body>
+    </html>
