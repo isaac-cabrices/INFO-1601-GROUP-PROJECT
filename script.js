@@ -160,6 +160,10 @@ document.addEventListener('DOMContentLoaded', ()=> {
 //When page reloaded, read local storage to get all habit cards
 function displayCardsOnReload(){
     let habitArray = store.get("SavedHabits");
+    if(habitArray == undefined){ // this if loop accounts for when there is no object created as yet.
+    store.set('SavedHabits', habitsList);
+      habitArray = store.get("SavedHabits");
+    }
     if(habitArray.length === 0){
         console.log("No Habits Stored");
     }
