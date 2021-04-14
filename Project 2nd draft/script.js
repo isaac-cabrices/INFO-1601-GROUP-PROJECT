@@ -122,7 +122,7 @@ document.addEventListener('DOMContentLoaded', ()=> {
 //Get Info from form to create habit card
 let habitsList = [];
 const createNewHabit = (e)=>{
-    if(document.getElementById('title').value != "" || document.getElementById('todo').value != "" ){
+    if(document.getElementById('title').value == "" || document.getElementById('todo').value == "" ){
         alert("invalid card");
     }
     else{
@@ -190,11 +190,11 @@ function displayCardsOnReload(){
             count++;
 
         }
-    } 
+    }
 }
 window.onload = displayCardsOnReload;
 
- 
+
 //DELETE CARD
 function deleteCard(delButtn){
     let parent = delButtn.parentNode;
