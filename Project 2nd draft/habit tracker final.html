@@ -18,10 +18,9 @@
             <span>Add Habit</span>
         </div>
     </div>
-
+              
     <!-- The Modal form for user input -->
     <div id="myModal" class="modal">
-
       <!-- Modal content -->
       <div class="modal-content">
         <span class="close">&times;</span>
@@ -31,35 +30,26 @@
                 <input type="text" id="title" placeholder="Name of the task"/>
             </div>
             <div class = "todoDiv">
-                <label for = "title">  Repeats </label>
+                <label for = "todo">  Repeats </label>
                 <input type="number" id="todo" placeholder="Repeat it how many times?"/>
             </div>
             <div class = "descDiv">
-                <label for = "title"> Description </label>
+                <label for = "description"> Description </label>
                 <input type="text" id="description" placeholder="Description of the task"/>
             </div>
             <div class = "inputDiv">
                 <label for = "inputButton"> input </label>
-                <button id="inputButton"> Create task </button>
+                <button id="inputButton" > Create task </button>
             </div>
         </form><!-- END forms section -->
       </div>
 
     </div>
     <!--HABIT CARDS-->
-    <div class="cards-wrapper">
-
+    <div id= "cards-container" class="cards-wrapper">
+        
     </div>
 
-    <!--ADD HABIT FORM
-    <form method = "post" class="new-habit-form">
-        <h1>ENTER A NEW HABIT</h1>
-        <input type="text" class="habit-title" placeholder="New Habit">
-        <input type="number" class="habit-repeats" placeholder="Number of Times">
-        <button class="create-habit-button">Create Habit</button>
-    </form>
-    -->
     <script src="script.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/store.js/2.0.0/store.legacy.min.js"></script>
 </body>
 </html>
