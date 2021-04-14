@@ -19,6 +19,8 @@ for(let card of cards) {
 }
 
 
+//CREATE CARDS
+
 // Get the modal
 var modal = document.getElementById("myModal");
 
@@ -30,62 +32,81 @@ var span = document.getElementsByClassName("close")[0];
 
 // When the user clicks on the button, open the modal
 btn.onclick = function() {
-  modal.style.display = "block";
+    modal.style.display = "block";
 }
 
 // When the user clicks on <span> (x), close the modal
 span.onclick = function() {
-  modal.style.display = "none";
+    modal.style.display = "none";
 }
 
 // When the user clicks anywhere outside of the modal, close it
 window.onclick = function(event) {
-  if (event.target == modal) {
+if (event.target == modal) {
     modal.style.display = "none";
   }
 }
 
-/*
-const tasks = [];
-//This is the object that holds all the user data. Example format:
-//    id: Date.now(),
-//    name: "Example task",
-//    description: "This in an example task. Create 3 tasks.",
-//    todo: 3,
-//    completed: 0
+function removeData(index){
+    let list = store.get('SavedHabits');
 
-// This function adds data to the tasks object, and then stores that object in local storage.
-const addToList = (event)=>{
-    if(document.getElementById('title').value != "" && document.getElementById('todo').value != "" ){
-        event.preventDefault();
-        let task = { // gets the data from the form.
-            id: Date.now(),
-            name: document.getElementById('title').value,
-            description: document.getElementById('description').value,
-            todo: document.getElementById('todo').value,
-            completed: 0
-        }
-        var oldTasks = store.get('tasklist');
-        oldTasks.push(task);
-        document.querySelector('form').reset(); //resets the fields.
-
-        store.set('tasklist', oldTasks);
-        modal.style.display = "none";
+    if(list[index].numRepeats == 0){
+        alert(`Congrats! you completed task "${list[index].habitTitle}"`)
+        var newTasks = store.get('SavedHabits');
+        newTasks.splice(index, 1);
+        store.set('SavedHabits', newTasks);
+        let cardsPosition = document.querySelector('.cards-wrapper');
+        cardsPosition.innerHTML = "";
+        displayCardsOnReload();
     }
     else{
-        alert("Invalid entry");
-      }
+        if (confirm('Are you sure you want to delete this card?')) {
+            var newTasks = store.get('SavedHabits');
+            newTasks.splice(index, 1);
+            store.set('SavedHabits', newTasks);
+            let cardsPosition = document.querySelector('.cards-wrapper');
+            cardsPosition.innerHTML = "";
+            displayCardsOnReload();
+
+        }
+    }
 }
 
-function removedata(index){
-    var newTasks = store.get('tasklist');
-    newTasks.splice(index, 1);
-    store.set('tasklist', newTasks);
-}
+// increments
+document.querySelector('#cw').addEventListener("click",  function(e){
 
-document.addEventListener('DOMContentLoaded', ()=> { //checks that the page is loaded first
-    document.getElementById('inputButton').addEventListener('click', addToList);
-});*/
+      if(e.target.id !=  "delbut1"){
+          let list = store.get('SavedHabits');// this gets the array
+
+          let taskID = e.target.parentNode.id; // gets the ID of the card
+
+          let loc = e.target.id;
+
+          let index = 0;
+          for (var i = 0; i < list.length; i++) {
+              if(list[i].id == taskID){
+                  index = i; // gets index of the card in the object array
+              }
+          }
+
+          let taskbars = list[index].numRepeats;
+
+          let delPosition = taskbars-1;
+          let parent = e.target;
+          let div = e.target.children[delPosition];
+          if(div){
+              parent.removeChild(div);
+              list[index].numRepeats--;
+              store.set('SavedHabits', list);
+          }
+
+          if (list[index].numRepeats==0) {
+              removeData(index);
+          }
+      }// end if
+
+}) ;
+
 
 
 var submitButton = document.getElementById('inputButton');
@@ -94,101 +115,109 @@ submitButton.onclick = function() {
     modal.style.display = "none";
 }
 
-//Get Info from form to create habit card
-let habitsList = [];
-const createNewHabit = (e)=>{
-    if(document.getElementById('title').value != "" && document.getElementById('todo').value != "" ){
-        //prevent form from submitting as default
-        e.preventDefault();
-
-        //get form data into object
-        let habitInfo = {
-            id: Date.now(),
-            habitTitle: document.getElementById('title').value,
-            numRepeats: document.getElementById('todo').value,
-            description: document.getElementById('description').value
-        }
-
-        //put form data object onto habits array. Appends it to existing list so as to not delete it.
-        var oldHabits = store.get('SavedHabits');
-        oldHabits.push(habitInfo);
-        console.log(oldHabits);
-
-        //reset form
-        document.getElementById('addTaskForm').reset();
-
-        //save to local storage
-        store.set('SavedHabits', oldHabits);
-
-        createHabitCard(habitInfo);
-    }
-    else{
-      alert("invalid card");
-    }
-}
-
-//Create habit card using form info from function above
-function createHabitCard(data){
-let habitArray = store.get("SavedHabits");
-let info = habitArray.find(function(habit, index){
-    if(habit.id == data.id)
-        return true;
-});
-let i = 0;
-let cardsPosition = document.querySelector('.cards-wrapper');
-let pbars = '';
-for(i = 0; i < info.numRepeats; i++){
-    pbars += '<div class="progress-bar"></div>'
-}
-cardsPosition.innerHTML += `
-    <div id="${info.id}" class="card">
-        <div class="habit-title">
-            <h1>${info.habitTitle}</h1>
-        </div>
-        <div id="delbut1" class="delete-button">X</div>
-        <div class="progress-bars">
-        ${pbars}
-        </div>
-    </div>
-        `
-}
-
 document.addEventListener('DOMContentLoaded', ()=> {
     submitButton.addEventListener('click', createNewHabit);
 });
 
+//Get Info from form to create habit card
+let habitsList = [];
+const createNewHabit = (e)=>{
+    if(document.getElementById('title').value != "" || document.getElementById('todo').value != "" ){
+        alert("invalid card");
+    }
+    else{
+      //prevent form from submitting as default
+      e.preventDefault();
+
+      //get form data into object
+      let habitInfo = {
+          id: Date.now(),
+          habitTitle: document.getElementById('title').value,
+          numRepeats: document.getElementById('todo').value,
+          description: document.getElementById('description').value,
+      }
+
+      //put form data object onto habits array. Appends it to existing list so as to not delete it.
+      var oldHabits = store.get('SavedHabits');
+      oldHabits.push(habitInfo);
+      console.log(oldHabits);
+
+      //reset form
+      document.getElementById('addTaskForm').reset();
+
+      //save to local storage
+      store.set('SavedHabits', oldHabits);
+
+      let cardsPosition = document.querySelector('.cards-wrapper');
+      cardsPosition.innerHTML = "";
+      displayCardsOnReload();
+    }
+}
+
 //When page reloaded, read local storage to get all habit cards
 function displayCardsOnReload(){
+    let count = 0;
     let habitArray = store.get("SavedHabits");
     if(habitArray == undefined){ // this if loop accounts for when there is no object created as yet.
     store.set('SavedHabits', habitsList);
       habitArray = store.get("SavedHabits");
     }
+
     if(habitArray.length === 0){
-        console.log("No Habits Stored");
+        alert("No Habits Stored");
     }
     else{
         for(let habit in habitArray){
             habit = habitArray[habit];
-            console.log(habit);
+            //console.log(habit);
             let i = 0;
             let cardsPosition = document.querySelector('.cards-wrapper');
             let pbars = '';
             for(i = 0; i < habit.numRepeats; i++){
-                pbars += '<div class="progress-bar"></div>'
+                pbars += '<div class="progress-bar" onClick="updateProgress(this)"></div>'
             }
             cardsPosition.innerHTML += `
                 <div id="${habit.id}" class="card">
                     <div class="habit-title">
                         <h1>${habit.habitTitle}</h1>
                     </div>
-                    <div id="delbut1" class="delete-button">X</div>
-                    <div class="progress-bars">
+                    <div id="delbut1" class="delete-button" onclick="removeData(${count})">X</div>
+                    <div id="progress-bars${count}" class="progress-bars">
                     ${pbars}
                     </div>
                 </div>
-                `
+                `;
+            count++;
+
         }
-    }
+    } 
 }
 window.onload = displayCardsOnReload;
+
+ 
+//DELETE CARD
+function deleteCard(delButtn){
+    let parent = delButtn.parentNode;
+    parent.remove();
+    let habitArray = JSON.parse(localStorage.getItem("SavedHabits"));
+    console.log(habitArray);
+    for(let i = 0; i < habitArray.length; i++){
+        if(habitArray[i].id == parent.id)
+            habitArray.splice(i, 1);    //remove card frrom array
+    }
+    localStorage.setItem('SavedHabits', JSON.stringify(habitArray));
+    console.log(habitArray);
+}
+
+//CHANGE PROGRESS
+let barsCompleted = 0;
+function updateProgress(bar){
+    let id = bar.parentNode.parentNode.id;
+    let change = document.getElementById(id);
+    let habitArray = JSON.parse(localStorage.getItem("SavedHabits"));
+    let info = habitArray.find(function(habit, index){
+        if(habit.id == id)
+            return true;
+    });
+    console.log(info);
+}
