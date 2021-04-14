@@ -1,3 +1,23 @@
+//Deleting cards
+
+function deleteCard(card) {
+
+  if (confirm('Are you sure you want to delete this card?')) {
+    document.getElementById(card.id).remove();
+  }
+
+}
+//Gets all the cards currently in the site by the .card class
+var cards;
+cards = document.querySelectorAll(".card");
+
+//For every card in the cards array sets an event listener on the delete button.
+for(let card of cards) {
+  card.querySelector(".delete-button").addEventListener('click', function() {
+    deleteCard(card);
+  });
+}
+
 
 //CREATE CARDS
 
@@ -47,6 +67,7 @@ function removeData(index){
             let cardsPosition = document.querySelector('.cards-wrapper');
             cardsPosition.innerHTML = "";
             displayCardsOnReload();
+
         }
     }
 }
@@ -113,7 +134,6 @@ const createNewHabit = (e)=>{
           id: Date.now(),
           habitTitle: document.getElementById('title').value,
           numRepeats: document.getElementById('todo').value,
-          todo:0,
           description: document.getElementById('description').value,
       }
 
@@ -201,6 +221,3 @@ function updateProgress(bar){
     });
     console.log(info);
 }
-
-
-
