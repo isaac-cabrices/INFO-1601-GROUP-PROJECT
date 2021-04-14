@@ -190,11 +190,11 @@ function displayCardsOnReload(){
             count++;
 
         }
-    } 
+    }
 }
 window.onload = displayCardsOnReload;
 
- 
+
 //DELETE CARD
 function deleteCard(delButtn){
     let parent = delButtn.parentNode;
