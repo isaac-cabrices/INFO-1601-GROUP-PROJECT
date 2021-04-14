@@ -138,7 +138,6 @@ body{
 
 
 /* Form box css*/
-
 /* The Modal (background) */
 .modal {
   display: none; /* Hidden by default */
@@ -159,7 +158,13 @@ body{
   margin: 15% auto; /* 15% from the top and centered */
   padding: 20px;
   border: 1px solid #888;
-  width: 80%; /* Could be more or less, depending on screen size */
+  border-radius: 40px 0 40px 0;
+  width: 70%; /* Could be more or less, depending on screen size */
+  height: 70%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
 }
 
 /* The Close Button */
@@ -168,6 +173,9 @@ body{
   float: right;
   font-size: 28px;
   font-weight: bold;
+  position: absolute;
+  top: 10px;
+  right: 20px;
 }
 
 .close:hover,
@@ -176,3 +184,13 @@ body{
   text-decoration: none;
   cursor: pointer;
 }
+
+.modal-content input{
+    border:1px solid #DADADA;
+    box-shadow:0 0 10px;
+}
+
+.modal-content .titleDiv, .todoDiv, .descDiv, .inputDiv{
+    padding: 10px 0px;
+}
+

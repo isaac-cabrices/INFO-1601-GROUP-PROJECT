@@ -1,8 +1,5 @@
 
-//Gets all the cards currently in the site by the .card class
-var cards;
-cards = document.querySelectorAll(".card");
-
+//CREATE CARDS
 
 // Get the modal
 var modal = document.getElementById("myModal");
@@ -15,17 +12,17 @@ var span = document.getElementsByClassName("close")[0];
 
 // When the user clicks on the button, open the modal
 btn.onclick = function() {
-  modal.style.display = "block";
+    modal.style.display = "block";
 }
 
 // When the user clicks on <span> (x), close the modal
 span.onclick = function() {
-  modal.style.display = "none";
+    modal.style.display = "none";
 }
 
 // When the user clicks anywhere outside of the modal, close it
 window.onclick = function(event) {
-  if (event.target == modal) {
+if (event.target == modal) {
     modal.style.display = "none";
   }
 }
@@ -59,41 +56,26 @@ document.querySelector('#cw').addEventListener("click",  function(e){
 
       if(e.target.id !=  "delbut1"){
           let list = store.get('SavedHabits');// this gets the array
-          console.log(list);
 
-          console.log("card");
           let taskID = e.target.parentNode.id; // gets the ID of the card
-          console.log(taskID);
 
-          console.log("p.bars");
           let loc = e.target.id;
-          console.log(loc);
 
           let index = 0;
           for (var i = 0; i < list.length; i++) {
-            console.log(list[i].id);
               if(list[i].id == taskID){
                   index = i; // gets index of the card in the object array
               }
           }
-          console.log("index");
-          console.log(index);
 
           let taskbars = list[index].numRepeats;
-          console.log("total tasks");
-          console.log(taskbars);
 
-          console.log("CHILDREN");
           let delPosition = taskbars-1;
           let parent = e.target;
           let div = e.target.children[delPosition];
           if(div){
-            console.log("removing");
-              console.log(div);
               parent.removeChild(div);
               list[index].numRepeats--;
-              console.log("remaining to do");
-              console.log(list[index].numRepeats);
               store.set('SavedHabits', list);
           }
 
@@ -103,6 +85,7 @@ document.querySelector('#cw').addEventListener("click",  function(e){
       }// end if
 
 }) ;
+
 
 
 var submitButton = document.getElementById('inputButton');
@@ -118,7 +101,7 @@ document.addEventListener('DOMContentLoaded', ()=> {
 //Get Info from form to create habit card
 let habitsList = [];
 const createNewHabit = (e)=>{
-    if(document.getElementById('title').value == null || document.getElementById('todo').value == null ){
+    if(document.getElementById('title').value != "" || document.getElementById('todo').value != "" ){
         alert("invalid card");
     }
     else{
@@ -159,8 +142,9 @@ function displayCardsOnReload(){
     store.set('SavedHabits', habitsList);
       habitArray = store.get("SavedHabits");
     }
+
     if(habitArray.length === 0){
-        console.log("No Habits Stored");
+        alert("No Habits Stored");
     }
     else{
         for(let habit in habitArray){
@@ -170,7 +154,7 @@ function displayCardsOnReload(){
             let cardsPosition = document.querySelector('.cards-wrapper');
             let pbars = '';
             for(i = 0; i < habit.numRepeats; i++){
-                pbars += `<div id="progress-bar${i}" class="progress-bar" ></div>`;
+                pbars += '<div class="progress-bar" onClick="updateProgress(this)"></div>'
             }
             cardsPosition.innerHTML += `
                 <div id="${habit.id}" class="card">
@@ -184,7 +168,39 @@ function displayCardsOnReload(){
                 </div>
                 `;
             count++;
+
         }
-    }
+    } 
 }
 window.onload = displayCardsOnReload;
+
+ 
+//DELETE CARD
+function deleteCard(delButtn){
+    let parent = delButtn.parentNode;
+    parent.remove();
+    let habitArray = JSON.parse(localStorage.getItem("SavedHabits"));
+    console.log(habitArray);
+    for(let i = 0; i < habitArray.length; i++){
+        if(habitArray[i].id == parent.id)
+            habitArray.splice(i, 1);    //remove card frrom array
+    }
+    localStorage.setItem('SavedHabits', JSON.stringify(habitArray));
+    console.log(habitArray);
+}
+
+//CHANGE PROGRESS
+let barsCompleted = 0;
+function updateProgress(bar){
+    let id = bar.parentNode.parentNode.id;
+    let change = document.getElementById(id);
+    let habitArray = JSON.parse(localStorage.getItem("SavedHabits"));
+    let info = habitArray.find(function(habit, index){
+        if(habit.id == id)
+            return true;
+    });
+    console.log(info);
+}
+
+
+
